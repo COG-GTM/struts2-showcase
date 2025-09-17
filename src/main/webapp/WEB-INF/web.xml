@@ -30,12 +30,20 @@
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
     <filter-mapping>
         <filter-name>struts-execute</filter-name>
         <url-pattern>/*</url-pattern>
+        <init-param>
+            <param-name>excludePatterns</param-name>
+            <param-value>/app/.*</param-value>
+        </init-param>
     </filter-mapping>
+    
+    
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">Struts2 Showcase - Angular</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+      </div>
+    </div>
+  </nav>
+  
+  <main class="container mt-4">
+    <router-outlet></router-outlet>
+  </main>
+</div>

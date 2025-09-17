@@ -63,6 +63,8 @@
 
     <include file="struts-xslt.xml" />
 
+    <include file="struts-api.xml" />
+
     <package name="default" extends="struts-default">
         <interceptors>
             <interceptor-stack name="crudStack">
