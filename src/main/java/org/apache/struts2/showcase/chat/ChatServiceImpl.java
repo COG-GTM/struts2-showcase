@@ -27,16 +27,16 @@ import java.util.Map;
 
 public class ChatServiceImpl implements ChatService {
 
-	private Map<String, User> availableUsers = new LinkedHashMap<String, User>();
-	private Map<String, Room> availableRooms = new LinkedHashMap<String, Room>();
+	private Map<String, User> availableUsers = new LinkedHashMap<>();
+	private Map<String, Room> availableRooms = new LinkedHashMap<>();
 
 
 	public List<User> getAvailableUsers() {
-		return new ArrayList<User>(availableUsers.values());
+		return new ArrayList<>(availableUsers.values());
 	}
 
 	public List<Room> getAvailableRooms() {
-		return new ArrayList<Room>(availableRooms.values());
+		return new ArrayList<>(availableRooms.values());
 	}
 
 	public void addRoom(Room room) {
@@ -58,11 +58,9 @@ public class ChatServiceImpl implements ChatService {
 		assert (name != null);
 		assert (name.trim().length() > 0);
 		availableUsers.remove(name);
-		for (Room room : availableRooms.values()) {
-			if (room.hasMember(name)) {
-				room.memberExit(name);
-			}
-		}
+		availableRooms.values().stream()
+				.filter(room -> room.hasMember(name))
+				.forEach(room -> room.memberExit(name));
 	}
 
 	public void exitRoom(String userName, String roomName) {

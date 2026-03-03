@@ -46,14 +46,14 @@ public class MemoryStorage implements Storage {
 	private static final long serialVersionUID = 8611213748834904125L;
 
 
-	private Map memory = new HashMap();
+	private Map<Class, Map<Serializable, IdEntity>> memory = new HashMap<>();
 
-	private Map getEntityMap(Class entityClass) {
+	private Map<Serializable, IdEntity> getEntityMap(Class entityClass) {
 		if (entityClass != null) {
-			Map tryMap = (Map) memory.get(entityClass);
+			Map<Serializable, IdEntity> tryMap = memory.get(entityClass);
 			if (tryMap == null) {
 				synchronized (memory) {
-					tryMap = new HashMap();
+					tryMap = new HashMap<>();
 					memory.put(entityClass, tryMap);
 				}
 			}
@@ -70,7 +70,7 @@ public class MemoryStorage implements Storage {
 
 	public IdEntity get(Class entityClass, Serializable id) {
 		if (entityClass != null && id != null) {
-			return (IdEntity) getEntityMap(entityClass).get(id);
+			return getEntityMap(entityClass).get(id);
 		} else {
 			return null;
 		}
@@ -134,12 +134,12 @@ public class MemoryStorage implements Storage {
 		if (entityClass != null) {
 			return getEntityMap(entityClass).values();
 		} else {
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 	}
 
 	public void reset() {
-		this.memory = new HashMap();
+		this.memory = new HashMap<>();
 	}
 
 }

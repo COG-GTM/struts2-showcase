@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Processes configuration, page, and action class paths to create snippets
@@ -45,9 +46,9 @@ public class ViewSourceAction extends ActionSupport implements ServletContextAwa
 	private String className;
 	private String config;
 
-	private List pageLines;
-	private List classLines;
-	private List configLines;
+	private List<String> pageLines;
+	private List<String> classLines;
+	private List<String> configLines;
 
 	private int configLine;
 	private int padding = 10;
@@ -138,21 +139,21 @@ public class ViewSourceAction extends ActionSupport implements ServletContextAwa
 	/**
 	 * @return the classLines
 	 */
-	public List getClassLines() {
+	public List<String> getClassLines() {
 		return classLines;
 	}
 
 	/**
 	 * @return the configLines
 	 */
-	public List getConfigLines() {
+	public List<String> getConfigLines() {
 		return configLines;
 	}
 
 	/**
 	 * @return the pageLines
 	 */
-	public List getPageLines() {
+	public List<String> getPageLines() {
 		return pageLines;
 	}
 
@@ -199,19 +200,17 @@ public class ViewSourceAction extends ActionSupport implements ServletContextAwa
 	 * @param targetLineNumber The target line number, negative to read all
 	 * @return A list of lines
 	 */
-	private List read(InputStream in, int targetLineNumber) {
-		List snippet = null;
+	private List<String> read(InputStream in, int targetLineNumber) {
+		List<String> snippet = null;
 		if (in != null) {
-			snippet = new ArrayList();
+			snippet = new ArrayList<>();
 			int startLine = 0;
 			int endLine = Integer.MAX_VALUE;
 			if (targetLineNumber > 0) {
 				startLine = targetLineNumber - padding;
 				endLine = targetLineNumber + padding;
 			}
-			try {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 				int lineno = 0;
 				String line;
 				while ((line = reader.readLine()) != null) {

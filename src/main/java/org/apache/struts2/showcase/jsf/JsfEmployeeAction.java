@@ -56,14 +56,14 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 */
 	@Override
 	public Collection getAvailableItems() {
-		return new ArrayList(super.getAvailableItems());
+		return new ArrayList<>(super.getAvailableItems());
 	}
 
 	/**
 	 * Changing the String array into a Map
 	 */
 	public Map<String, String> getAvailablePositionsAsMap() {
-		Map<String, String> map = new LinkedHashMap<String, String>();
+		Map<String, String> map = new LinkedHashMap<>();
 		for (String val : super.getAvailablePositions()) {
 			map.put(val, val);
 		}
@@ -74,7 +74,7 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 * Converting the list into a map
 	 */
 	public Map getAvailableLevelsAsMap() {
-		Map map = new LinkedHashMap();
+		Map<Object, Object> map = new LinkedHashMap<>();
 		for (Object val : super.getAvailableLevels()) {
 			map.put(val, val);
 		}
@@ -85,7 +85,7 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 * Converting the Skill object list into a map
 	 */
 	public Map<String, String> getAvailableSkills() {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		for (Object val : skillDao.findAll()) {
 			Skill skill = (Skill) val;
 			map.put(skill.getDescription(), skill.getName());
@@ -98,7 +98,7 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 */
 	public List<String> getSelectedSkillsAsList() {
 		System.out.println("asked for skills");
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		List skills = super.getSelectedSkills();
 		if (skills != null) {
 			for (Object val : skills) {

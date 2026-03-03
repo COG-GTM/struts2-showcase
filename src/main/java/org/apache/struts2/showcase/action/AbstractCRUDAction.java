@@ -65,8 +65,8 @@ public abstract class AbstractCRUDAction extends ActionSupport {
 	public String delete() throws Exception {
 		if (toDelete != null) {
 			int count = 0;
-			for (int i = 0, j = toDelete.length; i < j; i++) {
-				count = count + getDao().delete(toDelete[i]);
+			for (String id : toDelete) {
+				count += getDao().delete(id);
 			}
 			if (log.isDebugEnabled()) {
 				log.debug("AbstractCRUDAction - [delete]: " + count + " items deleted.");
