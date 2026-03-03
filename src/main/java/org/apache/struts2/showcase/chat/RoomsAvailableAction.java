@@ -29,7 +29,7 @@ public class RoomsAvailableAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Room> availableRooms = new ArrayList<Room>();
+	private List<Room> availableRooms = new ArrayList<>();
 
 	private ChatService chatService;
 

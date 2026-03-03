@@ -29,7 +29,7 @@ public class UsersAvailableAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<User> availableUsers = new ArrayList<User>();
+	private List<User> availableUsers = new ArrayList<>();
 	private ChatService chatService;
 
 	public UsersAvailableAction(ChatService chatService) {

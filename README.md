@@ -2,12 +2,25 @@
 * [Struts Showcase Application source code](https://archive.apache.org/dist/struts/2.3.20/) packaged in version 2.3.20
 * Exploits converted to Python3 from [immunio/apache-struts2-CVE-2017-5638](https://github.com/immunio/apache-struts2-CVE-2017-5638)
 
+## Prerequisites
+* **Java 8 (JDK 1.8)** or higher is required to build and run this project
+* **Apache Maven 3.x** for dependency management and builds
+
 ## Setup for Intellij
 * Download IntelliJ community
 * Import from VCS
 * File > Project Structure > Project SDK > JDK 1.8 
     * Install JDK 8 if it does not exist
 * View > Maven > Toggle 'Skip Tests' Mode & Run Maven Build
+
+## Build & Run with Maven
+```bash
+# Build the project
+mvn clean package
+
+# Run tests
+mvn test
+```
 
 ### Dockerfile Run & exploit
 ```

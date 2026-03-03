@@ -31,7 +31,7 @@ public class MessagesAvailableInRoomAction extends ActionSupport {
 
 	private String roomName;
 	private ChatService chatService;
-	private List<ChatMessage> messagesAvailableInRoom = new ArrayList<ChatMessage>();
+	private List<ChatMessage> messagesAvailableInRoom = new ArrayList<>();
 
 	public String getRoomName() {
 		return this.roomName;

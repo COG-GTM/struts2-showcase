@@ -26,7 +26,12 @@ import org.apache.struts2.showcase.model.Employee;
 import org.apache.struts2.showcase.model.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Overriding the EmployeeAction to main provide getters returning the data in
@@ -56,14 +61,14 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 */
 	@Override
 	public Collection getAvailableItems() {
-		return new ArrayList(super.getAvailableItems());
+		return new ArrayList<>(super.getAvailableItems());
 	}
 
 	/**
 	 * Changing the String array into a Map
 	 */
 	public Map<String, String> getAvailablePositionsAsMap() {
-		Map<String, String> map = new LinkedHashMap<String, String>();
+		Map<String, String> map = new LinkedHashMap<>();
 		for (String val : super.getAvailablePositions()) {
 			map.put(val, val);
 		}
@@ -73,9 +78,9 @@ public class JsfEmployeeAction extends EmployeeAction {
 	/**
 	 * Converting the list into a map
 	 */
-	public Map getAvailableLevelsAsMap() {
-		Map map = new LinkedHashMap();
-		for (Object val : super.getAvailableLevels()) {
+	public Map<String, String> getAvailableLevelsAsMap() {
+		Map<String, String> map = new LinkedHashMap<>();
+		for (String val : super.getAvailableLevels()) {
 			map.put(val, val);
 		}
 		return map;
@@ -85,7 +90,7 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 * Converting the Skill object list into a map
 	 */
 	public Map<String, String> getAvailableSkills() {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		for (Object val : skillDao.findAll()) {
 			Skill skill = (Skill) val;
 			map.put(skill.getDescription(), skill.getName());
@@ -98,8 +103,8 @@ public class JsfEmployeeAction extends EmployeeAction {
 	 */
 	public List<String> getSelectedSkillsAsList() {
 		System.out.println("asked for skills");
-		List<String> list = new ArrayList<String>();
-		List skills = super.getSelectedSkills();
+		List<String> list = new ArrayList<>();
+		List<String> skills = super.getSelectedSkills();
 		if (skills != null) {
 			for (Object val : skills) {
 				if (val instanceof Skill) {

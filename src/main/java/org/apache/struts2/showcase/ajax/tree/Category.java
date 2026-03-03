@@ -20,7 +20,7 @@
  */
 package org.apache.struts2.showcase.ajax.tree;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  */
 public class Category {
-	private static Map<Long, Category> catMap = new HashMap<Long, Category>();
+	private static Map<Long, Category> catMap = new HashMap<>();
 
 	static {
 		new Category(1, "Root",
@@ -62,10 +62,7 @@ public class Category {
 	public Category(long id, String name, Category... children) {
 		this.id = id;
 		this.name = name;
-		this.children = new ArrayList<Category>();
-		for (Category child : children) {
-			this.children.add(child);
-		}
+		this.children = Arrays.asList(children);
 
 		catMap.put(id, this);
 	}

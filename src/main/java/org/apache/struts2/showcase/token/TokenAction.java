@@ -40,8 +40,8 @@ public class TokenAction extends ActionSupport {
 		Integer balSource = (Integer) ActionContext.getContext().getSession().get("balanceSource");
 		Integer balDest = (Integer) ActionContext.getContext().getSession().get("balanceDestination");
 
-		Integer newSource = new Integer(balSource.intValue() - amount);
-		Integer newDest = new Integer(balDest.intValue() + amount);
+		Integer newSource = balSource - amount;
+		Integer newDest = balDest + amount;
 
 		ActionContext.getContext().getSession().put("balanceSource", newSource);
 		ActionContext.getContext().getSession().put("balanceDestination", newDest);
@@ -59,13 +59,13 @@ public class TokenAction extends ActionSupport {
 
 		if (balSource == null) {
 			// first time set up an initial account balance
-			balSource = new Integer(1200);
+			balSource = 1200;
 			ActionContext.getContext().getSession().put("balanceSource", balSource);
 		}
 
 		if (balDest == null) {
 			// first time set up an initial account balance
-			balDest = new Integer(2500);
+			balDest = 2500;
 			ActionContext.getContext().getSession().put("balanceDestination", balDest);
 		}
 

@@ -34,9 +34,9 @@ import java.util.List;
  */
 public class MultipleFileUploadUsingListAction extends ActionSupport {
 
-	private List<File> uploads = new ArrayList<File>();
-	private List<String> uploadFileNames = new ArrayList<String>();
-	private List<String> uploadContentTypes = new ArrayList<String>();
+	private List<File> uploads = new ArrayList<>();
+	private List<String> uploadFileNames = new ArrayList<>();
+	private List<String> uploadContentTypes = new ArrayList<>();
 
 
 	public List<File> getUpload() {
@@ -67,17 +67,11 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
 
 		System.out.println("\n\n upload1");
 		System.out.println("files:");
-		for (File u : uploads) {
-			System.out.println("*** " + u + "\t" + u.length());
-		}
+		uploads.forEach(u -> System.out.println("*** " + u + "\t" + u.length()));
 		System.out.println("filenames:");
-		for (String n : uploadFileNames) {
-			System.out.println("*** " + n);
-		}
+		uploadFileNames.forEach(n -> System.out.println("*** " + n));
 		System.out.println("content types:");
-		for (String c : uploadContentTypes) {
-			System.out.println("*** " + c);
-		}
+		uploadContentTypes.forEach(c -> System.out.println("*** " + c));
 		System.out.println("\n\n");
 		return SUCCESS;
 	}

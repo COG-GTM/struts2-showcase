@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Stream;
 
 /**
  * TestDataProvider.
@@ -63,10 +64,10 @@ public class TestDataProvider implements Serializable, InitializingBean {
 	};
 
 	public static final Employee[] TEST_EMPLOYEES = {
-			new Employee(new Long(1), "Alan", "Smithee", new Date(), new Float(2000f), true, POSITIONS[0],
-					TEST_SKILLS[0], null, "alan", LEVELS[0], "Nice guy"),
-			new Employee(new Long(2), "Robert", "Robson", new Date(), new Float(10000f), false, POSITIONS[1],
-					TEST_SKILLS[1], Arrays.asList(TEST_SKILLS).subList(1, TEST_SKILLS.length), "rob", LEVELS[1], "Smart guy")
+					new Employee(1L, "Alan", "Smithee", new Date(), 2000f, true, POSITIONS[0],
+						TEST_SKILLS[0], null, "alan", LEVELS[0], "Nice guy"),
+				new Employee(2L, "Robert", "Robson", new Date(), 10000f, false, POSITIONS[1],
+						TEST_SKILLS[1], Arrays.asList(TEST_SKILLS).subList(1, TEST_SKILLS.length), "rob", LEVELS[1], "Smart guy")
 	};
 
 	@Autowired
@@ -77,27 +78,35 @@ public class TestDataProvider implements Serializable, InitializingBean {
 
 	protected void addTestSkills() {
 		try {
-			for (int i = 0, j = TEST_SKILLS.length; i < j; i++) {
-				skillDao.merge(TEST_SKILLS[i]);
-			}
+			Stream.of(TEST_SKILLS).forEach(skill -> {
+				try {
+					skillDao.merge(skill);
+				} catch (StorageException e) {
+					log.error("TestDataProvider - [addTestSkills]: Exception caught: " + e.getMessage());
+				}
+			});
 			if (log.isInfoEnabled()) {
 				log.info("TestDataProvider - [addTestSkills]: Added test skill data.");
 			}
-		} catch (StorageException e) {
-			log.error("TestDataProvider - [addTestSkills]: Exception catched: " + e.getMessage());
+		} catch (Exception e) {
+			log.error("TestDataProvider - [addTestSkills]: Exception caught: " + e.getMessage());
 		}
 	}
 
 	protected void addTestEmployees() {
 		try {
-			for (int i = 0, j = TEST_EMPLOYEES.length; i < j; i++) {
-				employeeDao.merge(TEST_EMPLOYEES[i]);
-			}
+			Stream.of(TEST_EMPLOYEES).forEach(employee -> {
+				try {
+					employeeDao.merge(employee);
+				} catch (StorageException e) {
+					log.error("TestDataProvider - [addTestEmployees]: Exception caught: " + e.getMessage());
+				}
+			});
 			if (log.isInfoEnabled()) {
 				log.info("TestDataProvider - [addTestEmployees]: Added test employee data.");
 			}
-		} catch (StorageException e) {
-			log.error("TestDataProvider - [addTestEmployees]: Exception catched: " + e.getMessage());
+		} catch (Exception e) {
+			log.error("TestDataProvider - [addTestEmployees]: Exception caught: " + e.getMessage());
 		}
 	}
 
