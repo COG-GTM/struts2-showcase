@@ -30,7 +30,7 @@ import java.util.Set;
  */
 public class AddressAction extends ActionSupport {
 
-	private Set<Address> addresses = new LinkedHashSet<Address>();
+	private Set<Address> addresses = new LinkedHashSet<>();
 
 	public String input() throws Exception {
 		return SUCCESS;

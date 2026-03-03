@@ -48,7 +48,7 @@ public class ExampleAction extends ActionSupport {
 	}
 
 	public Map<String, Book> getBooks() {
-		Map<String, Book> books = new HashMap<String, Book>();
+		Map<String, Book> books = new HashMap<>();
 		books.put("Iliad", new Book("Iliad", "Homer"));
 		books.put("The Republic", new Book("The Replublic", "Plato"));
 		books.put("Thus Spake Zarathustra", new Book("Thus Spake Zarathustra",

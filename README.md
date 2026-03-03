@@ -2,12 +2,39 @@
 * [Struts Showcase Application source code](https://archive.apache.org/dist/struts/2.3.20/) packaged in version 2.3.20
 * Exploits converted to Python3 from [immunio/apache-struts2-CVE-2017-5638](https://github.com/immunio/apache-struts2-CVE-2017-5638)
 
+## Prerequisites
+* **Java 8 (JDK 1.8)** or higher
+* **Maven 3.x**
+
 ## Setup for Intellij
 * Download IntelliJ community
 * Import from VCS
 * File > Project Structure > Project SDK > JDK 1.8 
     * Install JDK 8 if it does not exist
 * View > Maven > Toggle 'Skip Tests' Mode & Run Maven Build
+
+## Build & Run with Maven
+```bash
+# Build the project
+mvn clean install
+
+# Run tests
+mvn test
+
+# Start with Jetty
+mvn jetty:run
+# Access at http://localhost:8080/struts2-showcase
+```
+
+## Java 8 Upgrade Notes
+This project has been upgraded from Java 7 to Java 8. Key changes include:
+* **Build configuration**: `maven-compiler-plugin` configured for source/target 1.8
+* **Diamond operator** (`<>`): Simplified generic type declarations throughout the codebase
+* **Lambda expressions**: Used in stream operations and functional interfaces
+* **Streams API**: Replaced iterator-based loops with streams where applicable
+* **Try-with-resources**: Applied for automatic resource management (e.g., `BufferedReader`)
+* **Enhanced for-loops**: Replaced C-style `for` loops with enhanced `for-each` loops
+* **Primitive boxing**: Replaced deprecated constructor boxing (e.g., `new Long()`) with literal values
 
 ### Dockerfile Run & exploit
 ```
