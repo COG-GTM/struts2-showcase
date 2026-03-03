@@ -20,7 +20,11 @@
  */
 package org.apache.struts2.showcase.chat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Room {
 
@@ -30,9 +34,9 @@ public class Room {
 	private String description;
 	private Date creationDate;
 
-	private List<ChatMessage> messages = new ArrayList<ChatMessage>();
+	private List<ChatMessage> messages = new ArrayList<>();
 
-	private Map<String, User> members = new LinkedHashMap<String, User>();
+	private Map<String, User> members = new LinkedHashMap<>();
 
 	public Room(String name, String description) {
 		this.name = name;
@@ -57,7 +61,7 @@ public class Room {
 
 	// (behaviour) members
 	public List<User> getMembers() {
-		return new ArrayList<User>(members.values());
+		return new ArrayList<>(members.values());
 	}
 
 	public User findMember(String name) {
@@ -94,7 +98,7 @@ public class Room {
 	}
 
 	public List<ChatMessage> getChatMessages() {
-		return new ArrayList<ChatMessage>(messages);
+		return new ArrayList<>(messages);
 	}
 
 }

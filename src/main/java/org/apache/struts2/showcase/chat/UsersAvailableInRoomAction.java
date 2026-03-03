@@ -30,7 +30,7 @@ public class UsersAvailableInRoomAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private ChatService chatService;
-	private List<User> usersAvailableInRoom = new ArrayList<User>();
+	private List<User> usersAvailableInRoom = new ArrayList<>();
 
 	private String roomName;
 

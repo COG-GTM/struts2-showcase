@@ -20,10 +20,10 @@
  */
 package org.apache.struts2.showcase.hangman;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class PropertiesVocabSource implements VocabSource {
 
@@ -58,14 +58,8 @@ public class PropertiesVocabSource implements VocabSource {
 	}
 
 	protected List<Vocab> readVocab(Properties prop) {
-		List<Vocab> vocabList = new ArrayList<Vocab>();
-
-		for (Map.Entry e : prop.entrySet()) {
-			String vocab = (String) e.getKey();
-			String hint = (String) e.getValue();
-
-			vocabList.add(new Vocab(vocab, hint));
-		}
-		return vocabList;
+		return prop.entrySet().stream()
+				.map(e -> new Vocab((String) e.getKey(), (String) e.getValue()))
+				.collect(Collectors.toList());
 	}
 }

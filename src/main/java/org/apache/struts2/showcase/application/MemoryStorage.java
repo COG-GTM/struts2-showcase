@@ -31,6 +31,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class MemoryStorage implements Storage {
 			Map tryMap = (Map) memory.get(entityClass);
 			if (tryMap == null) {
 				synchronized (memory) {
-					tryMap = new HashMap();
+					tryMap = new HashMap<>();
 					memory.put(entityClass, tryMap);
 				}
 			}
@@ -134,7 +135,7 @@ public class MemoryStorage implements Storage {
 		if (entityClass != null) {
 			return getEntityMap(entityClass).values();
 		} else {
-			return new ArrayList();
+			return Collections.emptyList();
 		}
 	}
 

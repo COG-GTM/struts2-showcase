@@ -35,7 +35,7 @@ public class ListPeopleAction extends ActionSupport {
 	@Autowired
 	private PersonManager personManager;
 
-	private List<Person> people = new ArrayList<Person>();
+	private List<Person> people = new ArrayList<>();
 
 	public String execute() {
 		people.addAll(personManager.getPeople());

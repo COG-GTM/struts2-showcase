@@ -27,7 +27,7 @@ import java.util.List;
 
 public class AutocompleterExampleAction extends ActionSupport {
 	private String select;
-	private List<String> options = new ArrayList<String>();
+	private List<String> options = new ArrayList<>();
 
 	private static final long serialVersionUID = -8481638176160014396L;
 

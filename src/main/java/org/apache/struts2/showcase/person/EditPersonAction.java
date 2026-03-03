@@ -26,7 +26,6 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,7 +41,7 @@ public class EditPersonAction extends ActionSupport {
 
 	@Autowired
 	private PersonManager personManager;
-	private List<Person> persons = new ArrayList<Person>();
+	private List<Person> persons = new ArrayList<>();
 
 	/**
 	 * A default implementation that does nothing an returns "success".
@@ -60,11 +59,10 @@ public class EditPersonAction extends ActionSupport {
 	 * @return {@link #SUCCESS}
 	 */
 	public String save() throws Exception {
-
-		for (Person p : persons) {
+		persons.forEach(p -> {
 			personManager.getPeople().remove(p);
 			personManager.getPeople().add(p);
-		}
+		});
 		return "list";
 	}
 
