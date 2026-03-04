@@ -71,7 +71,7 @@ public abstract class AbstractDao implements Serializable, Dao {
 		return getStorage().delete(object);
 	}
 
-	public Collection findAll() {
+	public Collection<IdEntity> findAll() {
 		return getStorage().findAll(getFeaturedClass());
 	}
 

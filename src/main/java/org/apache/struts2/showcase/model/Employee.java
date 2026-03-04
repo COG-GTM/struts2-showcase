@@ -40,7 +40,7 @@ public class Employee implements IdEntity {
 	private boolean married; //checkbox
 	private String position; //combobox
 	private Skill mainSkill; //select
-	private List otherSkills; //doubleSelect
+	private List<Skill> otherSkills; //doubleSelect
 	private String password; //password
 	private String level; //radio
 	private String comment; //textarea
@@ -54,7 +54,7 @@ public class Employee implements IdEntity {
 		this.lastName = lastName;
 	}
 
-	public Employee(Long empId, String firstName, String lastName, Date birthDate, Float salary, boolean married, String position, Skill mainSkill, List otherSkills, String password, String level, String comment) {
+	public Employee(Long empId, String firstName, String lastName, Date birthDate, Float salary, boolean married, String position, Skill mainSkill, List<Skill> otherSkills, String password, String level, String comment) {
 		this.empId = empId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -141,11 +141,11 @@ public class Employee implements IdEntity {
 		this.mainSkill = mainSkill;
 	}
 
-	public List getOtherSkills() {
+	public List<Skill> getOtherSkills() {
 		return otherSkills;
 	}
 
-	public void setOtherSkills(List otherSkills) {
+	public void setOtherSkills(List<Skill> otherSkills) {
 		this.otherSkills = otherSkills;
 	}
 

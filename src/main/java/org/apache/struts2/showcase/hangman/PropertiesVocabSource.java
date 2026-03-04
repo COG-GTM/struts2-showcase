@@ -22,7 +22,6 @@ package org.apache.struts2.showcase.hangman;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 public class PropertiesVocabSource implements VocabSource {
@@ -58,14 +57,9 @@ public class PropertiesVocabSource implements VocabSource {
 	}
 
 	protected List<Vocab> readVocab(Properties prop) {
-		List<Vocab> vocabList = new ArrayList<Vocab>();
+		List<Vocab> vocabList = new ArrayList<>();
 
-		for (Map.Entry e : prop.entrySet()) {
-			String vocab = (String) e.getKey();
-			String hint = (String) e.getValue();
-
-			vocabList.add(new Vocab(vocab, hint));
-		}
+		prop.forEach((key, value) -> vocabList.add(new Vocab((String) key, (String) value)));
 		return vocabList;
 	}
 }
