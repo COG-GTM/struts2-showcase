@@ -23,15 +23,20 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.apache.struts</groupId>
-        <artifactId>struts2-apps</artifactId>
-        <version>2.3.20</version>
-    </parent>
 
+    <groupId>org.apache.struts</groupId>
     <artifactId>struts2-showcase</artifactId>
+    <version>6.8.0</version>
     <packaging>war</packaging>
     <name>Struts 2 Showcase Webapp</name>
+
+    <properties>
+        <java.version>21</java.version>
+        <struts2.version>6.8.0</struts2.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <log4j2.version>2.23.1</log4j2.version>
+        <spring.version>5.3.39</spring.version>
+    </properties>
 
     <profiles>
         <profile>
@@ -44,21 +49,25 @@
             </properties>
         </profile>
     </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-bom</artifactId>
+                <version>${struts2.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
+        <!-- Struts 2 Core -->
         <dependency>
             <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-struts1-plugin</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-dojo-plugin</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-jsf-plugin</artifactId>
+            <artifactId>struts2-core</artifactId>
         </dependency>
 
         <dependency>
@@ -87,12 +96,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-jsp</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-convention-plugin</artifactId>
         </dependency>
@@ -103,53 +106,88 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-velocity-plugin</artifactId>
+        </dependency>
+
+        <!-- Servlet API (provided by container) -->
+        <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Velocity -->
+        <!-- Apache Tiles -->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>3.0.8</version>
+            <scope>runtime</scope>
         </dependency>
 
+        <!-- SiteMesh -->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-tools</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>opensymphony</groupId>
+            <groupId>org.sitemesh</groupId>
             <artifactId>sitemesh</artifactId>
+            <version>3.2.0</version>
         </dependency>
+
+        <!-- DWR -->
         <dependency>
-            <groupId>uk.ltd.getahead</groupId>
+            <groupId>org.directwebremoting</groupId>
             <artifactId>dwr</artifactId>
+            <version>3.0.2-RELEASE</version>
+        </dependency>
+
+        <!-- Logging: Log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-             <artifactId>commons-logging</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <!-- Bridge old commons-logging and log4j 1.x to log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-impl</artifactId>
-            <version>1.1.2</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+        <!-- Spring Framework -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-api</artifactId>
-            <version>1.1.2</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
         </dependency>
+
+        <!-- File Upload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
         </dependency>
 
+        <!-- Test dependencies -->
         <dependency>
             <groupId>net.sourceforge.jwebunit</groupId>
             <artifactId>jwebunit-core</artifactId>
@@ -182,40 +220,24 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.7.v20120910</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
                 <configuration>
-                    <stopKey>CTRL+C</stopKey>
-                    <stopPort>8999</stopPort>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>log4j.configuration</name>
-                            <value>file:${basedir}/src/main/resources/log4j.properties</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>slf4j</name>
-                            <value>false</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webAppSourceDirectory>${basedir}/src/main/webapp/</webAppSourceDirectory>
-                    <webAppConfig>
-                        <contextPath>/struts2-showcase</contextPath>
-                        <descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
-                    </webAppConfig>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                        <version>1.2.17</version>
-                    </dependency>
-                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
             </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
                 <configuration>
                     <excludes>
                         <exclude>it/**</exclude>
@@ -239,7 +261,4 @@
         </resources>
 
     </build>
-    <properties>
-    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>
