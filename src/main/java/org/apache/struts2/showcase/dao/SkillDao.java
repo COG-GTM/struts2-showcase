@@ -32,7 +32,7 @@ public class SkillDao extends AbstractDao {
 
 	private static final long serialVersionUID = -8160406514074630866L;
 
-	public Class getFeaturedClass() {
+	public Class<?> getFeaturedClass() {
 		return Skill.class;
 	}
 

@@ -34,7 +34,7 @@ import java.util.Collection;
 
 public interface Dao {
 
-	Class getFeaturedClass();
+	Class<?> getFeaturedClass();
 
 	IdEntity get(Serializable id);
 
@@ -48,5 +48,5 @@ public interface Dao {
 
 	int delete(IdEntity object) throws CreateException;
 
-	Collection findAll();
+	Collection<IdEntity> findAll();
 }

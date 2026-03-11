@@ -63,9 +63,9 @@ public class TestDataProvider implements Serializable, InitializingBean {
 	};
 
 	public static final Employee[] TEST_EMPLOYEES = {
-			new Employee(new Long(1), "Alan", "Smithee", new Date(), new Float(2000f), true, POSITIONS[0],
+			new Employee(1L, "Alan", "Smithee", new Date(), 2000f, true, POSITIONS[0],
 					TEST_SKILLS[0], null, "alan", LEVELS[0], "Nice guy"),
-			new Employee(new Long(2), "Robert", "Robson", new Date(), new Float(10000f), false, POSITIONS[1],
+			new Employee(2L, "Robert", "Robson", new Date(), 10000f, false, POSITIONS[1],
 					TEST_SKILLS[1], Arrays.asList(TEST_SKILLS).subList(1, TEST_SKILLS.length), "rob", LEVELS[1], "Smart guy")
 	};
 
@@ -77,8 +77,8 @@ public class TestDataProvider implements Serializable, InitializingBean {
 
 	protected void addTestSkills() {
 		try {
-			for (int i = 0, j = TEST_SKILLS.length; i < j; i++) {
-				skillDao.merge(TEST_SKILLS[i]);
+			for (Skill testSkill : TEST_SKILLS) {
+				skillDao.merge(testSkill);
 			}
 			if (log.isInfoEnabled()) {
 				log.info("TestDataProvider - [addTestSkills]: Added test skill data.");
@@ -90,8 +90,8 @@ public class TestDataProvider implements Serializable, InitializingBean {
 
 	protected void addTestEmployees() {
 		try {
-			for (int i = 0, j = TEST_EMPLOYEES.length; i < j; i++) {
-				employeeDao.merge(TEST_EMPLOYEES[i]);
+			for (Employee testEmployee : TEST_EMPLOYEES) {
+				employeeDao.merge(testEmployee);
 			}
 			if (log.isInfoEnabled()) {
 				log.info("TestDataProvider - [addTestEmployees]: Added test employee data.");

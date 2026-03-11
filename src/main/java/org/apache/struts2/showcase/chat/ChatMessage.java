@@ -20,11 +20,11 @@
  */
 package org.apache.struts2.showcase.chat;
 
-import java.util.Date;
+import java.time.Instant;
 
 public class ChatMessage {
 
-	private Date creationDate;
+	private Instant creationDate;
 	private String message;
 	private User creator;
 
@@ -32,12 +32,12 @@ public class ChatMessage {
 		assert (message != null);
 		assert (creator != null);
 
-		this.creationDate = new Date(System.currentTimeMillis());
+		this.creationDate = Instant.now();
 		this.message = message;
 		this.creator = creator;
 	}
 
-	public Date getCreationDate() {
+	public Instant getCreationDate() {
 		return creationDate;
 	}
 

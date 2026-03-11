@@ -30,9 +30,9 @@ public class Room {
 	private String description;
 	private Date creationDate;
 
-	private List<ChatMessage> messages = new ArrayList<ChatMessage>();
+	private List<ChatMessage> messages = new ArrayList<>();
 
-	private Map<String, User> members = new LinkedHashMap<String, User>();
+	private Map<String, User> members = new LinkedHashMap<>();
 
 	public Room(String name, String description) {
 		this.name = name;
@@ -57,7 +57,7 @@ public class Room {
 
 	// (behaviour) members
 	public List<User> getMembers() {
-		return new ArrayList<User>(members.values());
+		return new ArrayList<>(members.values());
 	}
 
 	public User findMember(String name) {
@@ -94,7 +94,7 @@ public class Room {
 	}
 
 	public List<ChatMessage> getChatMessages() {
-		return new ArrayList<ChatMessage>(messages);
+		return new ArrayList<>(messages);
 	}
 
 }

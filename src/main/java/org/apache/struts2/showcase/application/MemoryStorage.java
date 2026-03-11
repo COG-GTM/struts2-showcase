@@ -46,29 +46,22 @@ public class MemoryStorage implements Storage {
 	private static final long serialVersionUID = 8611213748834904125L;
 
 
-	private Map memory = new HashMap();
+	private Map<Class<?>, Map<Object, IdEntity>> memory = new HashMap<>();
 
-	private Map getEntityMap(Class entityClass) {
+	private Map<Object, IdEntity> getEntityMap(Class<?> entityClass) {
 		if (entityClass != null) {
-			Map tryMap = (Map) memory.get(entityClass);
-			if (tryMap == null) {
-				synchronized (memory) {
-					tryMap = new HashMap();
-					memory.put(entityClass, tryMap);
-				}
-			}
-			return tryMap;
+			return memory.computeIfAbsent(entityClass, k -> new HashMap<>());
 		} else {
 			return null;
 		}
 	}
 
-	private IdEntity intStore(Class entityClass, IdEntity object) {
+	private IdEntity intStore(Class<?> entityClass, IdEntity object) {
 		getEntityMap(entityClass).put(object.getId(), object);
 		return object;
 	}
 
-	public IdEntity get(Class entityClass, Serializable id) {
+	public IdEntity get(Class<?> entityClass, Serializable id) {
 		if (entityClass != null && id != null) {
 			return (IdEntity) getEntityMap(entityClass).get(id);
 		} else {
@@ -110,7 +103,7 @@ public class MemoryStorage implements Storage {
 		}
 	}
 
-	public int delete(Class entityClass, Serializable id) throws CreateException {
+	public int delete(Class<?> entityClass, Serializable id) throws CreateException {
 		try {
 			if (get(entityClass, id) != null) {
 				getEntityMap(entityClass).remove(id);
@@ -130,16 +123,16 @@ public class MemoryStorage implements Storage {
 		return delete(object.getClass(), object.getId());
 	}
 
-	public Collection findAll(Class entityClass) {
+	public Collection<IdEntity> findAll(Class<?> entityClass) {
 		if (entityClass != null) {
 			return getEntityMap(entityClass).values();
 		} else {
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 	}
 
 	public void reset() {
-		this.memory = new HashMap();
+		this.memory = new HashMap<>();
 	}
 
 }
