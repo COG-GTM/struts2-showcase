@@ -31,7 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -53,10 +52,9 @@ public class EmployeeAction extends AbstractCRUDAction implements Preparable {
 
 	public String execute() throws Exception {
 		if (getCurrentEmployee() != null && getCurrentEmployee().getOtherSkills() != null) {
-			setSelectedSkills(new ArrayList<String>());
-			Iterator it = getCurrentEmployee().getOtherSkills().iterator();
-			while (it.hasNext()) {
-				getSelectedSkills().add(((Skill) it.next()).getName());
+			setSelectedSkills(new ArrayList<>());
+			for (Object obj : getCurrentEmployee().getOtherSkills()) {
+				getSelectedSkills().add(((Skill) obj).getName());
 			}
 		}
 		return super.execute();

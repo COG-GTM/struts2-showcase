@@ -68,10 +68,10 @@ public class ViewSourceAction extends ActionSupport implements ServletContextAwa
 					in = servletContext.getResourceAsStream(page);
 				}
 			}
-			pageLines = read(in, -1);
-
 			if (in != null) {
-				in.close();
+				try (InputStream pageStream = in) {
+					pageLines = read(pageStream, -1);
+				}
 			}
 		}
 
@@ -81,10 +81,10 @@ public class ViewSourceAction extends ActionSupport implements ServletContextAwa
 			if (in == null) {
 				in = servletContext.getResourceAsStream("/WEB-INF/src" + className);
 			}
-			classLines = read(in, -1);
-
 			if (in != null) {
-				in.close();
+				try (InputStream classStream = in) {
+					classLines = read(classStream, -1);
+				}
 			}
 		}
 
@@ -199,19 +199,17 @@ public class ViewSourceAction extends ActionSupport implements ServletContextAwa
 	 * @param targetLineNumber The target line number, negative to read all
 	 * @return A list of lines
 	 */
-	private List read(InputStream in, int targetLineNumber) {
-		List snippet = null;
+	private List<String> read(InputStream in, int targetLineNumber) {
+		List<String> snippet = null;
 		if (in != null) {
-			snippet = new ArrayList();
+			snippet = new ArrayList<>();
 			int startLine = 0;
 			int endLine = Integer.MAX_VALUE;
 			if (targetLineNumber > 0) {
 				startLine = targetLineNumber - padding;
 				endLine = targetLineNumber + padding;
 			}
-			try {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 				int lineno = 0;
 				String line;
 				while ((line = reader.readLine()) != null) {

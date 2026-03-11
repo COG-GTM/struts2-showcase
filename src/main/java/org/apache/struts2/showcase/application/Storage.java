@@ -33,7 +33,7 @@ import java.util.Collection;
  */
 
 public interface Storage extends Serializable {
-	IdEntity get(Class entityClass, Serializable id);
+	IdEntity get(Class<?> entityClass, Serializable id);
 
 	Serializable create(IdEntity object) throws CreateException;
 
@@ -41,9 +41,9 @@ public interface Storage extends Serializable {
 
 	Serializable merge(IdEntity object) throws StorageException;
 
-	int delete(Class entityClass, Serializable id) throws CreateException;
+	int delete(Class<?> entityClass, Serializable id) throws CreateException;
 
 	int delete(IdEntity object) throws CreateException;
 
-	Collection findAll(Class entityClass);
+	Collection<IdEntity> findAll(Class<?> entityClass);
 }
