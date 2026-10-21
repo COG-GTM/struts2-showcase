@@ -2,7 +2,7 @@ FROM tomcat:8.5.55-jdk8-openjdk
 
 COPY . .
 
-RUN curl -LJO https://mirrors.ocf.berkeley.edu/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz && \
+RUN curl -LJO https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz && \
     tar -xvf ./apache-maven-3.6.3-bin.tar.gz -C /opt && \
     ln -s /opt/apache-maven-3.6.3 /opt/maven && \
     rm ./apache-maven-3.6.3-bin.tar.gz
